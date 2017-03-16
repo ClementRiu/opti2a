@@ -18,40 +18,33 @@ function [H] = hessien(q_c)
     
     qbq = q0 + B * q_c;
     
-    H = 2 * B' * (eye(q0 * q0') .* (r * qbq'))
+    H = 2 * B' * (eye(q0 * q0') .* (r * qbq')) * B;
     
 endfunction
 
 function [F, G, ind]=OraclePG(q_c,ind)
     
-    F = 0;
-    G = 0;
-    
-    if ind == 2  or ind==4 then
+    if ind == 2  | ind==4 then
         F = critere(q_c);
     end
     
-    if ind == 3 or ind==4 then
+    if ind == 3 | ind==4 then
         G = gradient(q_c);
     end
     
 endfunction
 
-function [F, G, ind]=OraclePH(q_c,ind)
+function [F, G, H, ind]=OraclePH(q_c,ind)
     
-    F = 0;
-    G = 0;
-    H = 0;
-    
-    if ind == 2  or ind==4 or ind == 7 then
+    if ind == 2  | ind==4 | ind == 7 then
         F = critere(q_c);
     end
     
-    if ind == 3 or ind==4 or ind ==6 or ind == 7 then
+    if ind == 3 | ind==4 | ind ==6 | ind == 7 then
         G = gradient(q_c);
     end
     
-    if ind == 5 or ind == 6 or ind == 7 then
+    if ind == 5 | ind == 6 | ind == 7 then
         H = hessien(q_c)
     end
     
