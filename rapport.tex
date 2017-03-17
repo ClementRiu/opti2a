@@ -8,13 +8,46 @@
 \usepackage{mathtools}
  
  
-\title{Exerices préparatoires, séance 3}
-\author{Chales AUGUSTE}
+\title{TP d'optimisation et contrôle}
+\author{Chales AUGUSTÈ \& Clément RIU}
 \date{\today}
 
 \newcommand{\R}{\mathbb{R}^n}
  
 \begin{document}
+
+\section{Calcul du gradient et du hessien}
+
+On va partir de la relation : $ J(q) = \frac{1}{3}\langle q , r \bullet q \bullet | q | \rangle + \langle pr , A_r q \rangle$ qu'on composera avec $q = q^{(0)} + B q_c$.
+
+\begin{align*}
+J(q+h) =& \frac{1}{3}\langle q + h , r \bullet q + h \bullet | q + h | \rangle + \langle pr , A_r (q + h) \rangle \\
+=& \frac{1}{3}(\langle q , r \bullet q + h \bullet | q + h | \rangle + \langle h , r \bullet q + h \bullet | q + h | \rangle) + \langle pr , A_r (q + h) \rangle \\
+=& \frac{1}{3}(\langle q , r \bullet q \bullet | q + h | \rangle + \langle q , r \bullet h \bullet | q + h | \rangle + \langle h , r \bullet q \bullet | q + h | \rangle + \langle h , r \bullet h \bullet | q + h | \rangle) \\ &+ \langle pr , A_r (q + h) \rangle \\ 
+\text{or : } | q + h | &= |q| + sign(q) h + o(h) \text{ d'où :} \\
+=& J(q) + \frac{1}{3}(\langle q , r \bullet q \bullet h sign(q) \rangle + \langle q , r \bullet h \bullet | q | \rangle + \langle h , r \bullet q \bullet | q | \rangle) + \langle pr , A_r h \rangle + o(h) \\
+\nabla J(h) =& \langle h , r \bullet q \bullet | q | \rangle) + \langle pr , A_r h \rangle
+\end{align*}
+
+D'où le résultat du gradient, \emph{via} $\nabla(q^{(0)} + B q_c) = B$: 
+$$ \nabla J (q^{(0)} + B q_c) = B^t(r \bullet (q^{(0)} + B q_c) \bullet | q^{(0)} + B q_c | + A_r^t(q^{(0)} + B q_c) $$
+
+De même le hessien :
+$$ H J (q^{(0)} + B q_c) = 2 B^t \text{Diag}(r_i (q^{(0)} + B q_c)_i) B $$
+
+\section{Équivalence des problèmes}
+
+Soit $q^*$ une solution optimale du problème $(13)$ alors on a $q^* \in U^{ad}_{(14)}$ et la relation $(9)$ montre l'optimalité dans le problème $(14)$ (et comme $U_{(13)}^{ad} \subset U_{(14)}^{ad}$ on a l'équivalence, encore une fois par la relation $(9)$).
+
+\noindent Soit $q^{**}$ solution optimale de $(14)$ en posant $q = q^{(0)} + B q_c$ on a $q^{**}$ solution otpimale de $(19)$. Et on a encore l'inculsion des ensemble admissibles, plus la relation $(18)$ qui assure l'équivalence.
+
+\section{Unicité de la solution}
+
+Les critères des problèmes sont continues et s'expriment sous la forme $a q^2|q| + b q$ et donc sont coercifs. La section d'après montre que les problèmes sont strictement convexes.
+
+Par le théorème $(5.3)$ les problèmes admettent une solution et elle est unique.
+
+\section{Convexité}
 Soit $x\in \mathbb{R}$ fixé. On pose $f(y) = -x y |x| + \frac{1}{3} y^2 |y| + \frac{2}{3} x^2 |x|$.
  $f'(y) = -x |x| + y^2 sgn(y)$. Donc, $f'(y) = 0 \Leftrightarrow x = y$. Or, la fonction puis croissante, donc la fonction atteint son minimum en x. Or, $f(x) = 0$. Donc pour $y \neq x, f(y) > 0
 $. \\
