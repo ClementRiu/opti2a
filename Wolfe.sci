@@ -53,6 +53,7 @@ function [alphan,ok]=Wolfe(alpha,x,D,Oracle)
 
    alphan = alpha;
    xn     = x;
+   xp     = 2 * abs(x) + abs(dltx) 
 
    // Boucle de calcul du pas
    //
@@ -66,7 +67,7 @@ function [alphan,ok]=Wolfe(alpha,x,D,Oracle)
 
       // Calcul des conditions de Wolfe
 
-      [F2,G2] = Oracle(xp,4);
+      [F2,G2] = Oracle(x,4);
       [F3,G3] = Oracle(xn,4);
 
 
@@ -78,19 +79,20 @@ function [alphan,ok]=Wolfe(alpha,x,D,Oracle)
       //   faire ok = 1 : on sort alors de la boucle while
       // - sinon, modifier la valeur de alphan : on reboucle.
 
-      if cond1 & cond2 then
-          ok = 1;
+      
+      if ~cond1 then
+         alphamax = alphan;
+         alphan =  (alphamin + alphamax) / 2;
       else
-         if cond1 then
-            alphamax = alphan;
-            alphan =  (alphamin + alphamax) / 2;
-         else
+         if ~cond2 then
             alphamin = alphan;
             if alphamax == %inf then
                alphan = 2 * alphamin;
             else
                alphan =  (alphamin + alphamax) / 2;
             end
+         else 
+            ok = 1;
          end
       end
 

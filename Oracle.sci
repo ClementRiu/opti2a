@@ -23,8 +23,8 @@ function [H] = hessien(q_c)
 endfunction
 
 function [F, G, ind]=OraclePG(q_c,ind)
-    H=0;
-    F=0;
+    F = 0;
+    G = 0;
 
     if ind == 2  | ind==4 then
         F = critere(q_c);
@@ -37,9 +37,9 @@ function [F, G, ind]=OraclePG(q_c,ind)
 endfunction
 
 function [F, G, H, ind]=OraclePH(q_c,ind)
-    H=0;
-    F=0;
-    G=0;
+    F = 0;
+    G = 0;
+    H = 0;
 
 
     if ind == 2  | ind==4 | ind == 7 then

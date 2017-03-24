@@ -42,6 +42,8 @@
    exec('Optim_Scilab.sci');
    exec('Wolfe.sci');
    exec('Gradient_W.sci');
+   exec('Gradient_F.sci');
+   exec('Newton.sce')
    //titrgr = "Fonction optim de Scilab sur le probleme primal";
 
    // -----> A completer...

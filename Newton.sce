@@ -1,11 +1,11 @@
-function [fopt,xopt,gopt]=Gradient_W(Oracle,xini)
+function [fopt,xopt,gopt]=Newton(Oracle,xini)
 
 
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 //         RESOLUTION D'UN PROBLEME D'OPTIMISATION SANS CONTRAINTES          //
 //                                                                           //
-//         Methode de gradient a pas varaible                                    //
+//         Methode de NEWTON                                                 //
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -14,9 +14,9 @@ function [fopt,xopt,gopt]=Gradient_W(Oracle,xini)
 // Parametres de la methode
 // ------------------------
 
-   titre = "Parametres du gradient a pas variable";
+   titre = "Parametres de Newton";
    labels = ["Nombre maximal d''iterations";...
-             "Valeur du pas de gradient initiale";...
+             "Valeur du pas de gradient";...
              "Seuil de convergence sur ||G||"];
    typ = list("vec",1,"vec",1,"vec",1);
    default = ["5000";"0.0005";"0.000001"];
@@ -43,8 +43,8 @@ function [fopt,xopt,gopt]=Gradient_W(Oracle,xini)
 
 //    - valeur du critere et du gradient
 
-      ind = 4;
-      [F,G] = Oracle(x,ind);
+      ind = 7;
+      [F, G, H] = Oracle(x,ind);
 
 //    - test de convergence
 
@@ -55,7 +55,7 @@ function [fopt,xopt,gopt]=Gradient_W(Oracle,xini)
 
 //    - calcul de la direction de descente
 
-      D = -G;
+      D = - inv(H) * G;
 
 //    - calcul de la longueur du pas de gradient
 
@@ -87,7 +87,7 @@ function [fopt,xopt,gopt]=Gradient_W(Oracle,xini)
            'Temps CPU         : ' string(tcpu);...
            'Critere optimal   : ' string(fopt);...
            'Norme du gradient : ' string(norm(gopt))];
-   disp('Fin de la methode de gradient a pas variable')
+   disp('Fin de la methode de gradient a pas fixe')
    disp(cvge)
 
 // - visualisation de la convergence
