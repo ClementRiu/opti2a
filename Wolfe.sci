@@ -60,14 +60,18 @@ function [alphan,ok]=Wolfe(alpha,x,D,Oracle)
    // xp represente le point pour la valeur precedente du pas.
 
    while ok == 0
-      
+
       xp = xn;
       xn = x + (alphan*D);
 
       // Calcul des conditions de Wolfe
 
-      // -----> A completer...
-      // -----> A completer...
+      [F2,G2] = Oracle(xp,4)
+      [F3,G3] = Oracle(xn,4)
+
+
+      cond1 = F3 <= F2 + omega1 * alphan * G2' * D
+      cond2 = G3' D >= omega2 * G2' * D 
 
       // Test de la valeur de alphan :
       // - si les deux conditions de Wolfe sont verifiees,
