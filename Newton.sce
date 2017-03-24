@@ -63,7 +63,7 @@ function [fopt,xopt,gopt]=Newton(Oracle,xini)
 
 //    - mise a jour des variables
 
-      x = x + (alpha*D);
+      x = x + (alpha * D);
 
 //    - evolution du gradient, du pas et du critere
 

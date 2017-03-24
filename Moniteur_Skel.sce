@@ -64,7 +64,7 @@
 
    // Exemple : la fonction "optim" de Scilab
    //
-   [fopt,xopt,gopt] = Gradient_W(OraclePH,xini);
+   [fopt,xopt,gopt] = Newton(OraclePH,xini);
 
    // -----> A completer...
 
