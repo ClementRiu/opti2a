@@ -78,8 +78,18 @@ function [alphan,ok]=Wolfe(alpha,x,D,Oracle)
       //   faire ok = 1 : on sort alors de la boucle while
       // - sinon, modifier la valeur de alphan : on reboucle.
 
-      // -----> A completer...
-      // -----> A completer...
+      if cond1 & cond2 then
+          ok = 1;
+      else
+         if cond1 then
+            alphamax = alphan;
+            alphan =  (alphamin + alphamax) / 2;
+         else
+            alphamin = alphan;
+            if alphamax == %inf then
+               alphan = 2 alphamin;
+            else
+               alphan =  (alphamin + alphamax) / 2;
 
       // Test d'indistinguabilite
 
@@ -90,4 +100,3 @@ function [alphan,ok]=Wolfe(alpha,x,D,Oracle)
    end
 
 endfunction
-c
