@@ -40,6 +40,8 @@
    //
    exec('Oracle.sci');
    exec('Optim_Scilab.sci');
+   exec('Wolfe.sci');
+   exec('Gradient_W.sci');
    //titrgr = "Fonction optim de Scilab sur le probleme primal";
 
    // -----> A completer...
@@ -60,7 +62,7 @@
 
    // Exemple : la fonction "optim" de Scilab
    //
-   [fopt,xopt,gopt] = Optim_Scilab(OraclePH,xini);
+   [fopt,xopt,gopt] = Gradient_W(OraclePH,xini);
 
    // -----> A completer...
 

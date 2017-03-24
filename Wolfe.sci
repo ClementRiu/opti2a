@@ -66,12 +66,12 @@ function [alphan,ok]=Wolfe(alpha,x,D,Oracle)
 
       // Calcul des conditions de Wolfe
 
-      [F2,G2] = Oracle(xp,4)
-      [F3,G3] = Oracle(xn,4)
+      [F2,G2] = Oracle(xp,4);
+      [F3,G3] = Oracle(xn,4);
 
 
-      cond1 = F3 <= F2 + omega1 * alphan * G2' * D
-      cond2 = G3' D >= omega2 * G2' * D 
+      cond1 = F3 <= F2 + omega1 * alphan * G2' * D;
+      cond2 = G3' * D >= omega2 * G2' * D;
 
       // Test de la valeur de alphan :
       // - si les deux conditions de Wolfe sont verifiees,
@@ -87,9 +87,12 @@ function [alphan,ok]=Wolfe(alpha,x,D,Oracle)
          else
             alphamin = alphan;
             if alphamax == %inf then
-               alphan = 2 alphamin;
+               alphan = 2 * alphamin;
             else
                alphan =  (alphamin + alphamax) / 2;
+            end
+         end
+      end
 
       // Test d'indistinguabilite
 
