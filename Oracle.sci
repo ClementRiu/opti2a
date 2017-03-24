@@ -18,11 +18,13 @@ function [H] = hessien(q_c)
 
     qbq = q0 + B * q_c;
 
-    H = 2 * B' * (eye(q0 * q0') .* (r * qbq')) * B;
+    H = 2 * B' * (eye(q0 * q0') .* (r * abs(qbq)')) * B;
 
 endfunction
 
 function [F, G, ind]=OraclePG(q_c,ind)
+    H=0;
+    F=0;
 
     if ind == 2  | ind==4 then
         F = critere(q_c);
@@ -36,7 +38,10 @@ endfunction
 
 function [F, G, H, ind]=OraclePH(q_c,ind)
     H=0;
-    
+    F=0;
+    G=0;
+
+
     if ind == 2  | ind==4 | ind == 7 then
         F = critere(q_c);
     end
