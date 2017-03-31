@@ -44,6 +44,8 @@
    exec('Gradient_W.sci');
    exec('Gradient_F.sci');
    exec('Newton.sce')
+   exec('Polak_Ribiere.sci')
+   exec('BFGS.sci')
    //titrgr = "Fonction optim de Scilab sur le probleme primal";
 
    // -----> A completer...
@@ -64,8 +66,10 @@
 
    // Exemple : la fonction "optim" de Scilab
    //
-   [fopt,xopt,gopt] = Newton(OraclePH,xini);
-
+//   [fopt,xopt,gopt] = Gradient_F(OraclePH,xini);
+//   [fopt,xopt,gopt] = Gradient_W(OraclePH,xini);
+//    [fopt,xopt,gopt] = Polak_Ribiere(OraclePH,xini);
+     [fopt,xopt,gopt] = BFGS(OraclePH,xini);
    // -----> A completer...
 
 // --------------------------

@@ -22,7 +22,9 @@ function [H] = hessien(q_c)
 
 endfunction
 
-function [F, G, ind]=OraclePG(q_c,ind)
+function [compteurF, G, ind]=OraclePG(q_c,ind, compteur)
+    compteur = compteur + 1;
+    
     F = 0;
     G = 0;
 
@@ -36,7 +38,9 @@ function [F, G, ind]=OraclePG(q_c,ind)
 
 endfunction
 
-function [F, G, H, ind]=OraclePH(q_c,ind)
+function [compteur, F, G, H, ind]=OraclePH(q_c,ind, compteur)
+    compteur = compteur + 1;
+    
     F = 0;
     G = 0;
     H = 0;

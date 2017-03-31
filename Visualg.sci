@@ -1,4 +1,4 @@
-function []=Visualg(logG,logP,Cout)
+function []=Visualg(logG,logP,Cout, compt_vector)
 
 
 ///////////////////////////////////////////////////////////////
@@ -30,7 +30,11 @@ numwin = 10;
 typvis =  1;
 
 [nlig,ncol] = size(logG);
+absXpas = [1:nlig]';
 absX = [1:nlig]';
+//absX = compt_vector';
+disp(size(compt_vector'))
+disp(size(logG))
 
 if typvis == 0 then
 
@@ -46,7 +50,7 @@ if typvis == 0 then
    numwin = numwin + 1;
    xset("window",numwin);
    clf(numwin);
-   plot2d(logP);
+   plot2d(absXpas, logP);
    xtitle('Pas de gradient (echelle logarithmique)','Iter.','log(alpha)');
 
    numwin = numwin + 1;
@@ -73,7 +77,7 @@ else
               'en fonction des iterations');
 
    subplot(212);
-   plot2d(absX,logP,style=2,...
+   plot2d(absXpas,logP,style=2,...
           leg='Pas de gradient (echelle logarithmique) '+...
               'en fonction des iterations');
 

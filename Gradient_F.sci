@@ -35,7 +35,8 @@ function [fopt,xopt,gopt]=Gradient_F(Oracle,xini)
 // -------------------------
 // Boucle sur les iterations
 // -------------------------
-
+   compteur = 0;
+   compt_vector = [];
    x = xini;
 
    kstar = iter;
@@ -44,7 +45,7 @@ function [fopt,xopt,gopt]=Gradient_F(Oracle,xini)
 //    - valeur du critere et du gradient
 
       ind = 4;
-      [F,G] = Oracle(x,ind);
+      [compteur, F,G] = Oracle(x,ind, compteur);
 
 //    - test de convergence
 
@@ -70,6 +71,7 @@ function [fopt,xopt,gopt]=Gradient_F(Oracle,xini)
       logG = [ logG ; log10(norm(G)) ];
       logP = [ logP ; log10(alpha) ];
       Cout = [ Cout ; F ];
+      compt_vector = [compt_vector ; compteur];
 
    end
 
@@ -92,6 +94,6 @@ function [fopt,xopt,gopt]=Gradient_F(Oracle,xini)
 
 // - visualisation de la convergence
 
-   Visualg(logG,logP,Cout);
+   Visualg(logG,logP,Cout, compt_vector);
 
 endfunction

@@ -1,11 +1,11 @@
-function [fopt,xopt,gopt]=Gradient_W(Oracle,xini)
+function [fopt,xopt,gopt]=Polak_Ribiere(Oracle,xini)
 
 
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 //         RESOLUTION D'UN PROBLEME D'OPTIMISATION SANS CONTRAINTES          //
 //                                                                           //
-//         Methode de gradient a pas varaible                                    //
+//         Methode de Polak-Ribière                                          //
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -14,9 +14,9 @@ function [fopt,xopt,gopt]=Gradient_W(Oracle,xini)
 // Parametres de la methode
 // ------------------------
 
-   titre = "Parametres du gradient a pas variable";
+   titre = "Parametres de Polak-Ribière";
    labels = ["Nombre maximal d''iterations";...
-             "Valeur du pas de gradient initiale";...
+             "Valeur du pas de gradient";...
              "Seuil de convergence sur ||G||"];
    typ = list("vec",1,"vec",1,"vec",1);
    default = ["5000";"0.0005";"0.000001"];
@@ -38,6 +38,8 @@ function [fopt,xopt,gopt]=Gradient_W(Oracle,xini)
    compteur = 0;
    compt_vector = [];
    x = xini;
+   [compteur, F, G] = Oracle(x, 3, compteur);
+   D = - G
 
    kstar = iter;
    for k = 1:iter
@@ -55,16 +57,13 @@ function [fopt,xopt,gopt]=Gradient_W(Oracle,xini)
       end
 
 //    - calcul de la direction de descente
-
-      D = -G;
-
-//    - calcul de la longueur du pas de gradient
-
       [compteur, alpha] = Wolfe(alphai, x, D, Oracle, compteur);
-
-//    - mise a jour des variables
-
       x = x + (alpha*D);
+      [compteur, F2, G2] = Oracle(x, ind, compteur);
+      
+      betak = G2' * (G2 - G) / (norm(G)**2);
+      
+      D = -G2 + betak * D;
 
 //    - evolution du gradient, du pas et du critere
 
@@ -89,11 +88,11 @@ function [fopt,xopt,gopt]=Gradient_W(Oracle,xini)
            'Temps CPU         : ' string(tcpu);...
            'Critere optimal   : ' string(fopt);...
            'Norme du gradient : ' string(norm(gopt))];
-   disp('Fin de la methode de gradient a pas variable')
+   disp('Fin de la methode de Polak-Ribière')
    disp(cvge)
 
 // - visualisation de la convergence
 
-    Visualg(logG,logP,Cout, compt_vector);
+   Visualg(logG,logP,Cout, compt_vector);
 
 endfunction

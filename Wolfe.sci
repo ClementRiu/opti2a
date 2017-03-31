@@ -1,4 +1,4 @@
-function [alphan,ok]=Wolfe(alpha,x,D,Oracle)
+function [compteur, alphan,ok]=Wolfe(alpha,x,D,Oracle, compteur)
 
 
 //////////////////////////////////////////////////////////////
@@ -47,7 +47,7 @@ function [alphan,ok]=Wolfe(alpha,x,D,Oracle)
    // Appel de l'oracle au point initial
    
    ind = 4;
-   [F,G] = Oracle(x,ind);
+   [compteur, F,G] = Oracle(x,ind, compteur)
 
    // Initialisation de l'algorithme
 
@@ -67,8 +67,8 @@ function [alphan,ok]=Wolfe(alpha,x,D,Oracle)
 
       // Calcul des conditions de Wolfe
 
-      [F2,G2] = Oracle(x,4);
-      [F3,G3] = Oracle(xn,4);
+      [compteur, F2,G2] = Oracle(x,4, compteur);
+      [compteur, F3,G3] = Oracle(xn,4, compteur);
 
 
       cond1 = F3 <= F2 + omega1 * alphan * G2' * D;
