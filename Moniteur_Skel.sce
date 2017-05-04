@@ -39,6 +39,7 @@
    // Exemple : la fonction "optim" de Scilab
    //
    exec('Oracle.sci');
+   exec('Oracle_lagrange.sci')
    exec('Optim_Scilab.sci');
    exec('Wolfe.sci');
    exec('Gradient_W.sci');
@@ -58,7 +59,8 @@
 
    // La dimension (n-md) est celle du probleme primal
 
-   xini = 0.1 * rand(n-md,1);
+//   xini = 0.1 * rand(n-md,1);
+   xini = 0.1 * rand(md,1);
 
 // ----------------------------0
 // Minimisation proprement dite
@@ -69,14 +71,20 @@
 //   [fopt,xopt,gopt] = Gradient_F(OraclePH,xini);
 //   [fopt,xopt,gopt] = Gradient_W(OraclePH,xini);
 //    [fopt,xopt,gopt] = Polak_Ribiere(OraclePH,xini);
-     [fopt,xopt,gopt] = BFGS(OraclePH,xini);
+//     [fopt,xopt,gopt] = BFGS(OraclePH,xini);
    // -----> A completer...
-
+//      [fopt,xopt,gopt] = Gradient_F(OraclePHL,xini);
+//   [fopt,xopt,gopt] = Gradient_W(OraclePHL,xini);
+//    [fopt,xopt,gopt] = Polak_Ribiere(OraclePHL,xini);
+//     [fopt,xopt,gopt] = BFGS(OraclePHL,xini);
+    [fopt,xopt,gopt] = Newton(OraclePHL,xini);
 // --------------------------
 // Verification des resultats
 // --------------------------
 
-   [q,z,f,p] = HydrauliqueP(xopt);
+//   [q,z,f,p] = HydrauliqueP(xopt);
+
+   [q,z,f,p] = HydrauliqueD(xopt);
 
    Verification(q,z,f,p);
 
