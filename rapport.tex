@@ -16,7 +16,19 @@
  
 \begin{document}
 
-\section{Calcul du gradient et du hessien}
+\section*{Séance 1}
+
+\subsection*{Test de l'oracle avec l'algorithme de gradient à pas fixe}
+Afin de tester notre oracle, nous l'avons utilisé avec un algoritmhe de gradient à pas fixe en lançant le programme principal avec la commande \textbf{[fopt,xopt,gopt] = Gradient\_F(OraclePH,xini);}. La valeur du pas du gradient est de 0.5, et on réalise 5000 itérations. \\
+\includegraphics[scale=0.5]{img1.png} \\
+Avec ces données d'entrée, l'algorithme converge. Il faut cependant faire attention car on n'aurait pas forcément convergé pour un pas de gradient trop grand. On voit d'ailleurs que la norme du gradient remonte à un moment. C'est peut être que notre pas de gradient était trop grand à ce moment là. On remarque d'autre part que le pas du gradient est fixe, ce qui est rassurant pour un tel algorithme 
+
+\subsection*{Test de l'oracle avec la fnction d'optimisation de Scilab}
+
+On lance le programme principal avec la ligne de commande : \textbf{[fopt,xopt,gopt] = Optim\_Scilab(OraclePGSansCompteur,xini);}. On vérifie alors avec les données affichées par le fichier vérification que l'on a bien convergé vers le minimum (les vérifications sont bonnes et la norme du gradient est très proche de 0).
+
+
+\subsection*{Calcul du gradient et du hessien}
 
 On va partir de la relation : $ J(q) = \frac{1}{3}\langle q , r \bullet q \bullet | q | \rangle + \langle pr , A_r q \rangle$ qu'on composera avec $q = q^{(0)} + B q_c$.
 
@@ -24,30 +36,30 @@ On va partir de la relation : $ J(q) = \frac{1}{3}\langle q , r \bullet q \bulle
 J(q+h) =& \frac{1}{3}\langle q + h , r \bullet q + h \bullet | q + h | \rangle + \langle pr , A_r (q + h) \rangle \\
 =& \frac{1}{3}(\langle q , r \bullet q + h \bullet | q + h | \rangle + \langle h , r \bullet q + h \bullet | q + h | \rangle) + \langle pr , A_r (q + h) \rangle \\
 =& \frac{1}{3}(\langle q , r \bullet q \bullet | q + h | \rangle + \langle q , r \bullet h \bullet | q + h | \rangle + \langle h , r \bullet q \bullet | q + h | \rangle + \langle h , r \bullet h \bullet | q + h | \rangle) \\ &+ \langle pr , A_r (q + h) \rangle \\ 
-\text{or : } | q + h | &= |q| + sign(q) h + o(h) \text{ d'où :} \\
+\text{or : } | q + h | &= |q| + sign(q) h + o(h) \text{ d'où :} \\
 =& J(q) + \frac{1}{3}(\langle q , r \bullet q \bullet h sign(q) \rangle + \langle q , r \bullet h \bullet | q | \rangle + \langle h , r \bullet q \bullet | q | \rangle) + \langle pr , A_r h \rangle + o(h) \\
 \nabla J(h) =& \langle h , r \bullet q \bullet | q | \rangle) + \langle pr , A_r h \rangle
 \end{align*}
 
 D'où le résultat du gradient, \emph{via} $\nabla(q^{(0)} + B q_c) = B$: 
-$$ \nabla J (q^{(0)} + B q_c) = B^t(r \bullet (q^{(0)} + B q_c) \bullet | q^{(0)} + B q_c | + A_r^t(q^{(0)} + B q_c) $$
+$$ \nabla J (q^{(0)} + B q_c) = B^t(r \bullet (q^{(0)} + B q_c) \bullet | q^{(0)} + B q_c | + A_r^t(q^{(0)} + B q_c) $$
 
 De même le hessien :
 $$ H J (q^{(0)} + B q_c) = 2 B^t \text{Diag}(r_i (q^{(0)} + B q_c)_i) B $$
 
-\section{Équivalence des problèmes}
+\subsection*{Équivalence des problèmes}
 
 Soit $q^*$ une solution optimale du problème $(13)$ alors on a $q^* \in U^{ad}_{(14)}$ et la relation $(9)$ montre l'optimalité dans le problème $(14)$ (et comme $U_{(13)}^{ad} \subset U_{(14)}^{ad}$ on a l'équivalence, encore une fois par la relation $(9)$).
 
 \noindent Soit $q^{**}$ solution optimale de $(14)$ en posant $q = q^{(0)} + B q_c$ on a $q^{**}$ solution optimale de $(19)$. Et on a encore l’inclusion des ensemble admissibles, plus la relation $(18)$ qui assure l'équivalence.
 
-\section{Unicité de la solution}
+\subsection*{Unicité de la solution}
 
 Les critères des problèmes sont continues et s'expriment sous la forme $a q^2|q| + b q$ et donc sont coercifs. La section d'après montre que les problèmes sont strictement convexes.
 
 Par le théorème $(5.3)$ les problèmes admettent une solution et elle est unique.
 
-\section{Convexité}
+\subsection*{Convexité}
 Soit $x\in \mathbb{R}$ fixé. On pose $f(y) = -x y |x| + \frac{1}{3} y^2 |y| + \frac{2}{3} x^2 |x|$.
  $f'(y) = -x |x| + y^2 sgn(y)$. Donc, $f'(y) = 0 \Leftrightarrow x = y$. Or, la fonction puis croissante, donc la fonction atteint son minimum en x. Or, $f(x) = 0$. Donc pour $y \neq x, f(y) > 0
 $. \\
@@ -62,7 +74,7 @@ Soit $x\in\R$. On note f la fonction objectif associée au problème 14. La fonc
 &>  \langle \nabla f(x),y-x\rangle 
 \end{align*}
 
-Donc la fonction objectif est fortement convexe par l'exercice 4.60. 
+Donc la fonction objectif est strictement convexe par l'exercice 4.60. 
 D'autre part supposons que $f$ est fortement convexe de module $b$. Soit $\epsilon =  \max_{0\leq i \leq n} \frac{3b}{2nr_i}$. On a pour $x = 0$ et $y = (\epsilon,...,\epsilon)$
 \begin{align*}
 &f(y) - f(x) \\
@@ -84,7 +96,7 @@ Soit $x\in\R$. On note g la fonction objectif associée au problème 19. La fonc
 &=  \langle \nabla g(x),y-x\rangle + \frac{1}{3}\langle Y,r \bullet Y \bullet |Y|\rangle + \frac{2}{3} \langle X,r \bullet X \bullet |X|\rangle -  \langle Y,r \bullet X \bullet |X|\rangle \\
 &> \langle \nabla g(x),y-x\rangle \tag{Par le lemme du début}
 \end{align*}
-Donc la fonction objectif est fortement convexe par l'exercice 4.60. \\
+Donc la fonction objectif est strictement convexe par l'exercice 4.60. \\
 D'autre part supposons que $f$ est fortement convexe de module $b$. Soit $\epsilon =  \max_{0\leq i \leq n} \frac{b}{2nr_i}$. On a pour $x = 0$ et $y = (\epsilon,...,\epsilon)$
 
 \begin{align*}
@@ -97,6 +109,31 @@ D'autre part supposons que $f$ est fortement convexe de module $b$. Soit $\epsil
 &=  \langle \nabla g(x),y-x\rangle + \frac{1}{3}\langle Y,r \bullet Y \bullet |Y|\rangle + \frac{2}{3} \langle X,r \bullet X \bullet |X|\rangle -  \langle Y,r \bullet X \bullet |X|\rangle \\
 &= \langle \nabla g(x),y-x\rangle + \frac{1}{3}\langle Y,r \bullet Y \bullet |Y|\rangle + \frac{2}{3} \langle q^{(0)},r \bullet q^{(0)} \bullet |q^{(0)}|\rangle -  \langle Y,r \bullet q^{(0)} \bullet |q^{(0)}|\rangle \\
 \end{align*}
+
+\section*{Séances 2 et 3}
+
+\subsection*{Autres méthodes}
+
+Pour les méthodes de ces séances, le pas est variable. Voici les courbes que l'on peut obtenir pour ces méthodes. On représente, dans l'ordre, la méthode du gradient de Wolfe, celle de Polakk-Ribière, celle de Newton, et enfin la méthode BFGS. \\
+\includegraphics[scale=0.5]{gradw.png} \\
+\includegraphics[scale=0.5]{Polak.png} \\
+\includegraphics[scale=0.5]{newton.png} \\
+\includegraphics[scale=0.5]{BGFS.png}
+
+\subsection*{Comparaison des méthodes}
+Pour chaque méthode d'optimisation, on détermine de bons hyperparamètres à la main. Ci-dessous sont listé les résultts pour chaque méthode.
+\begin{itemize}
+\item Méthode BGFS : pas de 1, convergence en 73 itérations, 376 appels à l'oracle, temps CPU de 0,01 secondes.
+\item Méthode Polak-Ribière : pas de 2, convergence en 448 itérations, 3625 appels à l'oracle, temps CPU de 0,80 secondes.
+\item Méthode de gradient de Wolfe : pas de 0.01, convergence en 2586 itérations, 36757 appels à l'Oracle, temps CPU de 7,87 secondes (on peut converger en un peu moins d'appels à l'oracle et un peu plus d'itérations avec un pas plus grand, mais l'ordre de grandeur est le même).
+\item Méthode de Newton avec recherche linéaire de Wolfe : pas > 1, convergence en 15 itérations, 30 appels à l'oracle, temps CPU de 0.03 secondes.
+\item Méthode du gradient à pas fixe : Pas de 1, plus de 500 itérations (le gradient ne converge pas même si on a bien le bon critère optimal), plus de 5000 appels à l'oracle, temps CPU de 2,11 secondes.
+\end{itemize}
+
+Toutes les méthodes convergent vers le même critère optimal : 3,734 environ.
+Nos temps CPU sont cohérents avec ceux de la fonction d'optimisation de Scilab : ce sont les mêmes. 
+La méthode BFGS est la plus rapide suivie de la méthode de Newton, puis de la méthode de Polak-ribière. Cependant, si les appels à l'oracle étaient très couteux, on pourrait avoir recours à la méthode de Newton car elle demande beaucoup moins d'appels à l'oracle, même si elle nécessite d'inverser une hessienne. 
+Les méthodes avec les gradients à pas fixes ou conjugués demandent beaucoup d'appels à l'oracle, ce qui pourrait être embêtant si l'oracle était plus complexe à calculer.
 
 \end{document}
 
