@@ -60,8 +60,8 @@ Les critères des problèmes sont continues et s'expriment sous la forme $a q^2|
 Par le théorème $(5.3)$ les problèmes admettent une solution et elle est unique.
 
 \subsection*{Convexité}
-Soit $x\in \mathbb{R}$ fixé. On pose $f(y) = -x y |x| + \frac{1}{3} y^2 |y| + \frac{2}{3} x^2 |x|$.
- $f'(y) = -x |x| + y^2 sgn(y)$. Donc, $f'(y) = 0 \Leftrightarrow x = y$. Or, la fonction puis croissante, donc la fonction atteint son minimum en x. Or, $f(x) = 0$. Donc pour $y \neq x, f(y) > 0
+Soit $x\in \mathbb{R}$ fixé. On pose $h(y) = -x y |x| + \frac{1}{3} y^2 |y| + \frac{2}{3} x^2 |x|$.
+ $h'(y) = -x |x| + y^2 sgn(y)$. Donc, $h'(y) = 0 \Leftrightarrow x = y$. Or, la fonction puis croissante, donc la fonction atteint son minimum en x. Or, $h(x) = 0$. Donc pour $y \neq x, h(y) > 0
 $. \\
 
 Soit $x\in\R$. On note f la fonction objectif associée au problème 14. La fonction est différentiable donc $\partial f(x) = \{\nabla f(x)\}$. 
@@ -80,8 +80,8 @@ D'autre part supposons que $f$ est fortement convexe de module $b$. Soit $\epsil
 &f(y) - f(x) \\
 &= -\frac{1}{3} \langle x,r \bullet x \bullet |x|\rangle  - \langle p_r,A_rx\rangle  + \frac{1}{3}\langle y,r \bullet y \bullet |y|\rangle  + \langle p_r,A_ry\rangle   \\
 &= \langle p_r,A_r(y - x)\rangle  + \langle y-x, r \bullet x \bullet |x|\rangle  + \langle r, -y \bullet x \bullet |x| + \frac{1}{3}y \bullet y \bullet |y| + \frac{2}{3}x \bullet x \bullet |x|\rangle \\
-&= \langle a,y-x\rangle   + \frac{1}{3}\langle r, \epsilon \bullet \epsilon \bullet \epsilon\rangle  \\
-&<  \langle a,y-x\rangle  + \frac{b \epsilon^2}{2}
+&= \langle A_r^Tp_r,y-x\rangle   + \frac{1}{3}\langle r, \epsilon \bullet \epsilon \bullet \epsilon\rangle  \\
+&<  \langle \nabla f(x),y-x\rangle  + \frac{b \epsilon^2}{2}
 \end{align*}
 Donc on a une contradiction d'après l'exercice corrigé 4.60. Donc la fonction n'est pas fortement convexe.
 
@@ -97,7 +97,7 @@ Soit $x\in\R$. On note g la fonction objectif associée au problème 19. La fonc
 &> \langle \nabla g(x),y-x\rangle \tag{Par le lemme du début}
 \end{align*}
 Donc la fonction objectif est strictement convexe par l'exercice 4.60. \\
-D'autre part supposons que $f$ est fortement convexe de module $b$. Soit $\epsilon =  \max_{0\leq i \leq n} \frac{b}{2nr_i}$. On a pour $x = 0$ et $y = (\epsilon,...,\epsilon)$
+D'autre part supposons que $f$ est fortement convexe de module $b$. Soit $\epsilon>0$. On a pour $x = 0$ et $y = (\epsilon,...,\epsilon)$
 
 \begin{align*}
 &g(y) - g(x) \\
@@ -109,6 +109,7 @@ D'autre part supposons que $f$ est fortement convexe de module $b$. Soit $\epsil
 &=  \langle \nabla g(x),y-x\rangle + \frac{1}{3}\langle Y,r \bullet Y \bullet |Y|\rangle + \frac{2}{3} \langle X,r \bullet X \bullet |X|\rangle -  \langle Y,r \bullet X \bullet |X|\rangle \\
 &= \langle \nabla g(x),y-x\rangle + \frac{1}{3}\langle Y,r \bullet Y \bullet |Y|\rangle + \frac{2}{3} \langle q^{(0)},r \bullet q^{(0)} \bullet |q^{(0)}|\rangle -  \langle Y,r \bullet q^{(0)} \bullet |q^{(0)}|\rangle \\
 \end{align*}
+Puisque les 3 termes de droite tendent vers 0 lorque $\epsilon$ tend vers 0, on voit qu'avec un raisonnement epsilonesque, on montrera le résultat de la même manière que précédemment. On ne détaille pas les calculs car comme mentionné en cours, ce n'est pas l'objet de ce TP.
 
 \section*{Séances 2 et 3}
 
