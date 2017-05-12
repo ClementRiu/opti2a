@@ -18,11 +18,11 @@
 
    exec('Probleme_R.sce');
    exec('Structures_R.sce');
-   
+
    // Affichage des resultats
 
    exec('Visualg.sci');
-   
+
    // Verification  des resultats
 
    exec('HydrauliqueP.sci');
@@ -73,11 +73,11 @@
 //    [fopt,xopt,gopt] = Polak_Ribiere(OraclePH,xini);
 //     [fopt,xopt,gopt] = BFGS(OraclePH,xini);
    // -----> A completer...
-//      [fopt,xopt,gopt] = Gradient_F(OraclePHL,xini);
+//         [fopt,xopt,gopt] = Gradient_F(OraclePHL,xini);
 //   [fopt,xopt,gopt] = Gradient_W(OraclePHL,xini);
-//    [fopt,xopt,gopt] = Polak_Ribiere(OraclePHL,xini);
-//     [fopt,xopt,gopt] = BFGS(OraclePHL,xini);
-    [fopt,xopt,gopt] = Newton(OraclePHL,xini);
+//   [fopt,xopt,gopt] = Polak_Ribiere(OraclePHL,xini); // 1. 408
+//     [fopt,xopt,gopt] = BFGS(OraclePHL,xini); // 0.22
+//    [fopt,xopt,gopt] = Newton(OraclePHL,xini); // 0.052
 // --------------------------
 // Verification des resultats
 // --------------------------

@@ -32,7 +32,7 @@ typvis =  1;
 [nlig,ncol] = size(logG);
 absXpas = [1:nlig]';
 absX = [1:nlig]';
-//absX = compt_vector';
+absX = compt_vector';
 disp(size(compt_vector'))
 disp(size(logG))
 
@@ -66,20 +66,23 @@ else
 //
 
    xset("window",numwin);
-   xset("wdim",600,650);
+   xset("wdim",600,970);
    clf(numwin);
 
 //   xtitle(titrgr);
 
-   subplot(211);
+  subplot(311);
+  plot2d(absXpas,logG,style=5,...
+        leg='Norme du gradient (echelle logarithmique) '+...
+           'en fonction des itérations');
+
+   subplot(312);
    plot2d(absX,logG,style=5,...
           leg='Norme du gradient (echelle logarithmique) '+...
-              'en fonction des iterations');
+              'en fonction des appels à l oracle');
 
-   subplot(212);
-   plot2d(absXpas,logP,style=2,...
-          leg='Pas de gradient (echelle logarithmique) '+...
-              'en fonction des iterations');
+   subplot(313);
+   plot2d(absXpas,logP,style=2);
 
 end
 
